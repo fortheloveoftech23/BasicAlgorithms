@@ -18,7 +18,11 @@ import java.util.Scanner;
  */
 public class FibonacciDemo{
 
-    private static final boolean DEBUG = false;
+    /**
+     * Turn the DEBUG flag on to see some
+     * extra console output
+     */
+    public static final boolean DEBUG = false;
 
     public static int getNForFetchingFibonacci(){
         System.out.print("Enter n to view the nth Fibonacci number : ");
@@ -30,13 +34,24 @@ public class FibonacciDemo{
                 throw new ArithmeticException();
             }
         }catch (Exception e){
-            //e.printStackTrace();
+            if(DEBUG) {
+                e.printStackTrace();
+            }
             System.out.println("Next time a non negative integer please");
             System.exit(1);
         }
         return n;
     }
 
+    /**
+     * A stupid recursive implementation
+     * of Fibonacci
+     * try giving n as 100 and wait for
+     * eternity to get a result
+     * or bump into some out of memory
+     * @param n
+     * @return
+     */
     public static int fibo_rec(int n){
         if(n==0 || n==1){
             return 1;
@@ -44,6 +59,16 @@ public class FibonacciDemo{
         return fibo_rec(n-1)+fibo_rec(n-2);
     }
 
+    /**
+     * A memoized version of
+     * Fibonacci. It tries to
+     * remember a particular
+     * number once computed
+     * and reuses the stored value
+     * if recomputation is requested
+     * @param n
+     * @return
+     */
     public static int fib_memo(int n){
         int junkValue = -1;
         int [] fibMemoArray = new int[n+1];
@@ -73,6 +98,13 @@ public class FibonacciDemo{
 
     }
 
+    /**
+     * A Dynamic program of Fibonacci
+     * It starts from the first element
+     * and works bottom up
+     * @param n
+     * @return
+     */
     public static int fibo_dp(int n){
         if(n==0 || n==1){
             return 1;
@@ -86,6 +118,14 @@ public class FibonacciDemo{
         return fibDpArray[n];
     }
 
+    /**
+     * An optimized dp solution
+     * that get rids of the array
+     * as at a time only previous two values
+     * are necessary
+     * @param n
+     * @return
+     */
     public static int fibo_dp_optimized(int n){
         if(n==0 || n==1){
             return 1;
@@ -101,6 +141,12 @@ public class FibonacciDemo{
         return current;
     }
 
+    /**
+     * The driver module to
+     * test different versions
+     * of fibonacci
+     * @param args
+     */
     public static void main(String [] args){
         System.out.println("Welcome to seeing Fibonacci in a new light");
         int valueOfn = getNForFetchingFibonacci();
