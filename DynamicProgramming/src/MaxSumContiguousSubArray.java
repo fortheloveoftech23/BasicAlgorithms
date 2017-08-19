@@ -13,7 +13,7 @@ public class MaxSumContiguousSubArray {
 
 
 
-    public static int max_sum_contigous_array(int[] array){
+    public static int max_sum_contigous_array_2D(int[] array){
         int max = Integer.MIN_VALUE;
         int start = -1;
         int end = -1;
@@ -39,9 +39,26 @@ public class MaxSumContiguousSubArray {
         return max;
     }
 
+    private static int maximumOfTwo(int x,int y){
+        return x>y?x:y;
+    }
+
+    public static final int max_sum_contiguous_array(int [] array){
+        int max = array[0];
+        int current_max = array[0];
+        for(int i = 1 ; i<array.length ; i++){
+            current_max = maximumOfTwo(current_max+array[i],array[i]);
+            max = maximumOfTwo(max,current_max);
+        }
+        return max;
+    }
+
     public static void main(String [] args){
-        int [] array = {-2,7,3,-11,16,3,-5,-8};
-        int max = max_sum_contigous_array(array);
-        System.out.println("Maximum sum in the contiguous subarray is : "+max);
+        int [] array = {-2,-7,3,-11,2,0,-5,8};
+        int max = max_sum_contigous_array_2D(array);
+        System.out.println("Maximum sum in the contiguous subarray in O(n^2) : "+max);
+        max = max_sum_contiguous_array(array);
+        System.out.println("Maximum sum in the contiguous subarray in O(n) : "+max);
+
     }
 }
